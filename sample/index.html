@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Sample Custom Element - Dropdown List </title>
+<script src="scripts/dropdownBox/dropdownBox.tpl.js"></script>
+<script src="scripts/dropdownBox/dropdownBox.js"></script>
+<script>
+function resetSelection() {
+  let ele = document.getElementById('someDropDown2');
+  let sampleOptions = {};
+  let i = 0;
+  for(i;i < 3;i++)
+  {
+      let rand = Math.floor(Math.random() * 6) + 1;
+      sampleOptions['key'+rand] = 'value' + rand;
+  }
+  
+  ele.setAttribute('options',JSON.stringify(sampleOptions));
+}
+
+function toggle(){
+    let ele = document.getElementById('someDropDown2');
+    ele.setAttribute("disabled", !(ele.getAttribute("disabled") === "true"));
+}
+
+function tryChange()
+{
+    console.log('onchange', this.value);
+}
+</script>
+<style>
+
+</style>
+</head>
+
+<body>
+    <h3>Sample Custom Dropdown List</h3>
+    <p>
+        The following is a sample custom HTMLElement Dropdown Box. 
+        
+        The custom element is basically an INPUT text field which has a DATALIST reference.
+
+        The custom dropdown list has the following attributes and event handlers
+        <ul>Attributes
+            <li>id - Element Id</li>
+            <li>value - Value of the element. This is just an INPUT field</li>
+            <li>options - Dropdown list options. Sets the DATALIST in the custom element</li>
+        </ul>
+        <ul>Event Handler Functions
+            <li>onchange - Function that will be invoked when there is a change to the value in the Dropdown Box</li>
+         </ul>
+    </p>
+    <dropdown-box id="someDropDown2" onchange="tryChange" options='{"key1":"value1", "key2":"value2"}'></dropdown-box>
+    <br><br>
+    <button onclick="resetSelection()">Reset Selection</button>
+    <button onclick="toggle()">Toggle Field</button>
+</body>
+
+</html>
